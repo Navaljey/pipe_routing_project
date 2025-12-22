@@ -1,0 +1,198 @@
+{
+  "name": "Small",
+  "description": "8개 파이프를 가진 작은 테스트 인스턴스",
+  "bounding_box": [
+    11,
+    10,
+    12
+  ],
+  "grid_resolution": 0.5,
+  "equipment_pieces": 4,
+  "logical_obstacles": 7,
+  "obstacles": [
+    {
+      "name": "Equipment-1",
+      "type": "physical",
+      "min_corner": [
+        2,
+        2,
+        0
+      ],
+      "max_corner": [
+        4,
+        4,
+        3
+      ]
+    },
+    {
+      "name": "Equipment-2",
+      "type": "physical",
+      "min_corner": [
+        6,
+        2,
+        0
+      ],
+      "max_corner": [
+        8,
+        4,
+        3
+      ]
+    },
+    {
+      "name": "Equipment-3",
+      "type": "physical",
+      "min_corner": [
+        2,
+        6,
+        0
+      ],
+      "max_corner": [
+        4,
+        8,
+        3
+      ]
+    },
+    {
+      "name": "Equipment-4",
+      "type": "physical",
+      "min_corner": [
+        6,
+        6,
+        0
+      ],
+      "max_corner": [
+        8,
+        8,
+        3
+      ]
+    },
+    {
+      "name": "Access-Zone-1",
+      "type": "logical",
+      "min_corner": [
+        4.5,
+        0,
+        0
+      ],
+      "max_corner": [
+        5.5,
+        10,
+        2
+      ]
+    }
+  ],
+  "pipes": [
+    {
+      "id": 0,
+      "start": [
+        2.5,
+        2,
+        3
+      ],
+      "goal": [
+        6.5,
+        6,
+        3
+      ],
+      "diameter": 1.0
+    },
+    {
+      "id": 1,
+      "start": [
+        7.5,
+        2,
+        3
+      ],
+      "goal": [
+        2.5,
+        7,
+        3
+      ],
+      "diameter": 1.0
+    },
+    {
+      "id": 2,
+      "start": [
+        3,
+        3,
+        0
+      ],
+      "goal": [
+        7,
+        7,
+        0
+      ],
+      "diameter": 0.5
+    },
+    {
+      "id": 3,
+      "start": [
+        3,
+        7,
+        0
+      ],
+      "goal": [
+        7,
+        3,
+        0
+      ],
+      "diameter": 0.5
+    },
+    {
+      "id": 4,
+      "start": [
+        1,
+        1,
+        1
+      ],
+      "goal": [
+        9,
+        9,
+        1
+      ],
+      "diameter": 0.75
+    },
+    {
+      "id": 5,
+      "start": [
+        1,
+        9,
+        1
+      ],
+      "goal": [
+        9,
+        1,
+        1
+      ],
+      "diameter": 0.75
+    },
+    {
+      "id": 6,
+      "start": [
+        2,
+        5,
+        2
+      ],
+      "goal": [
+        8,
+        5,
+        2
+      ],
+      "diameter": 0.6
+    },
+    {
+      "id": 7,
+      "start": [
+        5,
+        2,
+        2
+      ],
+      "goal": [
+        5,
+        8,
+        2
+      ],
+      "diameter": 0.6
+    }
+  ]
+}

@@ -174,8 +174,8 @@ class QualityEvaluator:
         
         # 총 길이
         print(f"{'총 길이 (m)':<20} "
-              f"{metrics1['total_length']:.1f}m":<20} "
-              f"{metrics2['total_length']:.1f}m":<20}")
+              f"{f'{metrics1['total_length']:.1f}m':<20} "
+              f"{f'{metrics2['total_length']:.1f}m':<20}")
         
         # 총 구부림
         print(f"{'총 구부림':<20} "
