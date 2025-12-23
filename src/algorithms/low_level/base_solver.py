@@ -43,3 +43,12 @@ class BaseSolver(ABC):
             timeout (int): 초 단위 시간 제한
         """
         self.timeout = timeout
+    
+    def get_solver_name(self):
+        """
+        솔버 이름 반환
+        
+        Returns:
+            str: 솔버 이름
+        """
+        return self.__class__.__name__

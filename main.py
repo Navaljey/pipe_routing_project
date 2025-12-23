@@ -6,14 +6,27 @@ import argparse
 import sys
 import os
 
-# 프로젝트 루트를 Python 경로에 추가
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+# MiniZinc 경로 자동 추가
+minizinc_path = r"C:\Program Files\MiniZinc"
+if os.path.exists(minizinc_path):
+    os.environ["PATH"] = minizinc_path + os.pathsep + os.environ.get("PATH", "")
+    print(f"MiniZinc 경로 추가됨: {minizinc_path}")
+# =======================
+
+# 프로젝트 루트를 Python 경로에 추가 (절대 경로 확보)
+current_dir = os.path.dirname(os.path.abspath(__file__))
+if current_dir not in sys.path:
+    sys.path.insert(0, current_dir)
 
 from src.environment.instance_loader import InstanceLoader
 from src.algorithms.low_level.a_star_solver import AStarSolver
 from src.algorithms.high_level.fix_order import FixOrder
 from src.algorithms.high_level.pbs import PBS
 from src.evaluation.quality_evaluator import QualityEvaluator
+
+# MiniZinc 솔버 import (강제 실행하여 에러 확인)
+from src.algorithms.low_level.minizinc_solver import MiniZincSolver
+MINIZINC_AVAILABLE = True
 
 
 def main():
@@ -37,6 +50,22 @@ def main():
         default='PBS',
         choices=['FixOrder', 'PBS', 'PBS-MP'],
         help='사용할 알고리즘'
+    )
+    
+    parser.add_argument(
+        '--solver',
+        type=str,
+        default='astar',
+        choices=['astar', 'minizinc'],
+        help='Low-level 솔버 선택 (astar: A* 알고리즘, minizinc: MiniZinc)'
+    )
+    
+    parser.add_argument(
+        '--minizinc-backend',
+        type=str,
+        default='cbc',
+        choices=['cbc', 'scip', 'chuffed', 'gecode'],
+        help='MiniZinc 백엔드 솔버 (cbc: COIN-OR CBC, scip: SCIP)'
     )
     
     parser.add_argument(
@@ -68,6 +97,9 @@ def main():
     print("=" * 70)
     print(f"인스턴스: {args.instance}")
     print(f"알고리즘: {args.algorithm}")
+    print(f"Low-level 솔버: {args.solver}")
+    if args.solver == 'minizinc':
+        print(f"MiniZinc 백엔드: {args.minizinc_backend}")
     print(f"시간 제한: {args.timeout}초")
     print("=" * 70)
     print()
@@ -89,9 +121,25 @@ def main():
     
     # 2. 솔버 초기화
     print("2. 솔버 초기화...")
-    solver = AStarSolver(environment)
-    solver.set_timeout(180)
-    print(f"   ✓ A* 솔버 준비 완료")
+    
+    if args.solver == 'astar':
+        solver = AStarSolver(environment)
+        solver.set_timeout(180)
+        print(f"   ✓ A* 솔버 준비 완료")
+    
+    elif args.solver == 'minizinc':
+        if not MINIZINC_AVAILABLE:
+            print(f"   ✗ 오류: MiniZinc 라이브러리가 설치되지 않았습니다.")
+            print(f"   설치 방법:")
+            print(f"   1. pip install minizinc")
+            print(f"   2. MiniZinc IDE: https://www.minizinc.org/software.html")
+            return
+        
+        # MiniZinc 솔버 초기화 (디버깅 모드)
+        solver = MiniZincSolver(environment, solver_name=args.minizinc_backend, debug=True)
+        solver.set_timeout(180)
+        print(f"   ✓ MiniZinc 솔버 준비 완료 (백엔드: {args.minizinc_backend})")
+    
     print()
     
     # 3. 알고리즘 실행

@@ -173,9 +173,9 @@ class QualityEvaluator:
         print(f"{'총 비용':<20} {cost1_str:<20} {cost2_str:<20}")
         
         # 총 길이
-        print(f"{'총 길이 (m)':<20} "
-              f"{f'{metrics1['total_length']:.1f}m':<20} "
-              f"{f'{metrics2['total_length']:.1f}m':<20}")
+        length1_str = f"{metrics1['total_length']:.1f}m"
+        length2_str = f"{metrics2['total_length']:.1f}m"
+        print(f"{'총 길이 (m)':<20} {length1_str:<20} {length2_str:<20}")
         
         # 총 구부림
         print(f"{'총 구부림':<20} "

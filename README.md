@@ -37,6 +37,27 @@ source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
+### 4. MiniZinc 설치 (선택사항 - 더 최적화된 경로 원할 때)
+
+#### MiniZinc 다운로드 및 설치
+1. [MiniZinc 공식 사이트](https://www.minizinc.org/software.html)에서 다운로드
+2. OS에 맞는 버전 설치
+   - Windows: MiniZinc-X.X.X-bundle-windows.exe 실행
+   - Mac: MiniZinc-X.X.X-bundle-macos.dmg 마운트 후 설치
+   - Linux: `sudo apt install minizinc` 또는 AppImage 다운로드
+
+#### 백엔드 솔버 확인
+MiniZinc 설치 시 다음 오픈소스 솔버가 포함됩니다:
+- **COIN-OR CBC**: 빠른 MIP 솔버 (기본값, 권장)
+- **SCIP**: 강력한 제약 최적화 솔버
+- **Chuffed**: CP 솔버
+- **Gecode**: CP 솔버
+
+설치 확인:
+```bash
+minizinc --solvers
+```
+
 ## 실행 방법
 
 ### 기본 실행
