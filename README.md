@@ -139,3 +139,29 @@ MIT License
 ## 문의
 
 문제가 발생하면 GitHub Issues에 등록해주세요.
+
+
+# 파이프 경로 최적화 (Pipe Routing Optimizer)
+
+## 🛠 실행 옵션 가이드
+
+성공률을 높이기 위해 아래 인자들을 조합하여 실행하십시오.
+
+### 1. 굴곡 허용치 상향 (8/8 성공을 위한 핵심)
+파이프가 더 많이 꺾일 수 있게 허용하여 좁은 틈새를 통과하게 합니다.
+```powershell
+python main.py --max-bends 15
+
+
+# 🛠 파이프 경로 최적화 솔루션 (PBS + MiniZinc)
+
+## 🌟 주요 특징
+1. **Weighted Sampling**: 파이프의 맨해튼 거리를 계산하여 어려운 파이프에 우선순위를 부여합니다.
+2. **Dynamic Configuration**: 굴곡도, 타임아웃, 최적화 강도를 명령어로 조절 가능합니다.
+3. **Visibility**: 파이프 직경(Diameter) 및 진행 상태를 표 형태로 상세 출력합니다.
+
+## 🚀 실행 옵션 안내
+
+### 기본 실행
+```powershell
+python main.py --instance small --timeout 2400
